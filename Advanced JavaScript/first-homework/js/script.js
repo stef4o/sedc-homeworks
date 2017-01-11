@@ -74,6 +74,8 @@ let proccesRandomData = function(data) {
     };
 };
 
+
+// button event listener
 button.addEventListener("click", function() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "data/filelist.json", true);
