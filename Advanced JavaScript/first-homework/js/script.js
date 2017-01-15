@@ -1,67 +1,45 @@
 let button = document.getElementById("dataProcces");
+let display = document.getElementById("display");
+
 
 let makeCalculations = function(data) {
     switch (data.operation) {
         case "square":
-            alert(sumSquareRoot(data));
+            printOnDisplay("square", data.data, getSum("square", data.data, x => x * x));
             break;
         case "cube":
-            alert(sumCube(data));
+            printOnDisplay("cube", data.data, getSum("cube", data.data, x => x * x * x));
             break;
         case "sine":
-            alert(sumSine(data));
+            printOnDisplay("sine", data.data, getSum("sine", data.data, x => Math.sin(x)));
             break;
         case "cosine":
-            alert(sumCosine(data));
+            printOnDisplay("cosine", data.data, getSum("cosine", data.data, x => Math.cos(x)));
             break;
         case "log":
-            alert(sumLog(data));
+            printOnDisplay("log", data.data, getSum("log", data.data, x => Math.log(x)));
             break;
     }
 };
 
-let sumSquareRoot = function(data) {
+let getSum = function(wordOper, data, operation) {
     let result = 0;
-    for (item of data.data) {
-        result += Math.sqrt(parseInt(item, 10));
+    let steps = "";
+    for (item of data) {
+        steps += `${result} + ${wordOper}(${item}) =`;
+        result += operation(item);
+        steps += ` ${result}<br/>`;
     }
-    return result;
+    return { "result": result, "steps": steps };
 }
 
-let sumCube = function(data) {
-    let result = 0;
-    for (item of data.data) {
-        result += Math.pow(parseInt(item, 10), 3);
-    }
-    return result;
-}
-
-let sumSine = function(data) {
-    let result = 0;
-    for (item of data.data) {
-        result += Math.sin(parseInt(item, 10));
-    }
-    return result;
-}
-
-let sumCosine = function(data) {
-    let result = 0;
-    for (item of data.data) {
-        result += Math.cos(parseInt(item, 10));
-    }
-    return result;
-}
-
-let sumLog = function(data) {
-    let result = 0;
-    for (item of data.data) {
-        result += Math.log(parseInt(item, 10));
-    }
-    return result;
+let printOnDisplay = function(operation, data, calcs) {
+    display.innerHTML = `Operation "${operation}" <br/> Data: ${data} <br/> 
+                         Result: ${calcs.result} <br/> Steps:<br/> ${calcs.steps}`;
 }
 
 let proccesRandomData = function(data) {
-    let randomNumber = Math.random() * 10 | 0;
+    let randomNumber = Math.random() * data.length | 0;
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "data/" + data[randomNumber], true);
     xhttp.send();
@@ -74,8 +52,6 @@ let proccesRandomData = function(data) {
     };
 };
 
-
-// button event listener
 button.addEventListener("click", function() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "data/filelist.json", true);
