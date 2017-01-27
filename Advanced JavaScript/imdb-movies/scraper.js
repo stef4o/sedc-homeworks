@@ -1,5 +1,5 @@
 let movies = $(".lister-list").find("tr");
-let moviesFinal = [];
+let moviesFinal = []; // array with all data
 
 movies.each(function() {
     let posterLink = `http://www.imdb.com${$(this).find("td.posterColumn").find("a").attr("href")}`;
