@@ -18,6 +18,7 @@ movies.each(function() {
         index,
         title,
         titleLink,
+        titleTitle,
         secondaryInfo,
         rating,
         ratingTitle
