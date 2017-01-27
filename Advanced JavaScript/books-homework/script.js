@@ -56,7 +56,7 @@ let sortAscendingOrDescending = (a, b) => {
         a = a.toLowerCase();
         b = b.toLowerCase();
     }
-    if (sorted == sortOrder.ASCENDING) { //(sorted == sortWays.AUTHOR_ASCENDING || sorted == sortWays.TITLE_ASCENDING || sorted == sortWays.AWARDS_ASCENDING) {
+    if (sorted == sortOrder.ASCENDING) {
         return a < b ? 1 : (a > b ? -1 : 0);
     } else if (sorted == sortOrder.DESCENDING) {
         return a > b ? 1 : (a < b ? -1 : 0);
