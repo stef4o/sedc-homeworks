@@ -1,9 +1,16 @@
 let movies = $(".lister-list").find("tr");
 let moviesFinal = []; // array with all data
+let images = [];
+
+let levelOne = (url) => {
+    let d = document.createElement("div");
+    $(d).load(url);
+    return $(d);
+}
 
 movies.each(function() {
     let posterLink = `http://www.imdb.com${$(this).find("td.posterColumn").find("a").attr("href")}`;
-    let posterImage = $(this).find("td.posterColumn").find("a").find("img").attr("src");
+    let theOtherSite = levelOne(posterLink);
     let index = movies.index($(this)) + 1;
     let title = $(this).find("td.titleColumn").find("a").text();
     let titleLink = `http://www.imdb.com${$(this).find("td.titleColumn").find("a").attr("href")}`;
@@ -14,7 +21,7 @@ movies.each(function() {
 
     moviesFinal.push({
         posterLink,
-        posterImage,
+        theOtherSite,
         index,
         title,
         titleLink,
@@ -23,4 +30,9 @@ movies.each(function() {
         rating,
         ratingTitle
     });
+});
+
+moviesFinal.forEach((m) => {
+    m.posterImage = m.theOtherSite.find(".poster").find("img").attr("src");
+    delete m.theOtherSite;
 });
