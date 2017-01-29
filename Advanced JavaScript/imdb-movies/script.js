@@ -117,21 +117,15 @@ $(() => {
     });
 
     $("#sortOrder").on('click', function() {
-        // handleSorts($("#sortBy").val());
-        console.log(getSortOrder());
         if ($(this).hasClass("fa-caret-down")) {
-            //sortMovies((a, b) => comparator(a, b, getSortOrder()));
             $(this).removeClass("fa-caret-down");
             $(this).addClass("fa-caret-up");
         } else {
             $(this).removeClass("fa-caret-up");
             $(this).addClass("fa-caret-down");
-            //sortMovies((a, b) => comparator(a, b, getSortOrder()));
         }
         handleSorts($("#sortBy").val());
     });
-
-    //console.log($("#pages").find("li.page-item"));
 
     $.ajax("data.json", {
         complete: (data) => {
