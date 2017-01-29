@@ -90,6 +90,7 @@ let sortMovies = (wayOfSort) => {
     MGUA = getMovies();
     MGUA.sort(wayOfSort);
     pageNumber = 1;
+    setPage(pageNumber);
     displayPage(pageNumber, pageSize, getMovies(), moviesContainer);
 }
 
