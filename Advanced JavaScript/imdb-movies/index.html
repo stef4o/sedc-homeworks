@@ -17,7 +17,7 @@
 
 <body>
 
-    <div class="container">
+    <div class="container-fluid">
         <nav aria-label="Page navigation example" class="justify-content-center">
             <ul class="pagination justify-content-center">
                 <li id="previous" class="page-item">
@@ -29,20 +29,36 @@
                     <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
-            <div class="row">
-                <div class="col-sm-6 offset-sm-5">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-3 offset-col-2 padding">
                     <label class="mr-sm-2" for="inlineFormCustomSelect">Sort by:</label>
-                    <select id="sortBy" class="custom-select mb-2 mr-sm-2 mb-sm-0 justify-content-center" id="inlineFormCustomSelect">
-                    <option selected>Choose...</option>
-                    <option value="title">Title</option>
-                    <option value="rating">Rating</option>
-                    <option value="secondaryInfo">Release</option>
+                    <select id="sortBy" class="custom-select mb-2 mr-sm-2 mb-sm-0 justify-content-center">
+                        <option selected>Choose...</option>
+                        <option value="title">Title</option>
+                        <option value="rating">Rating</option>
+                        <option value="secondaryInfo">Release</option>
                     </select>
-                    <i id="sortOrder" class="fa fa-caret-down" aria-hidden="true"></i>
+                    <i id="sortOrder" class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                </div>
+                <div class="col-sm-12 col-md-2 padding">
+                    <label class="mr-sm-2" for="inlineFormCustomSelect">Show per page:</label>
+                    <select id="showPerPage" class="custom-select mb-2 mr-sm-2 mb-sm-0 justify-content-center">
+                        <option value="16" selected>16</option>
+                        <option value="24">24</option>
+                        <option value="32">32</option>
+                        <option value="48">48</option>
+                        <option value="64">64</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-md-3 padding">
+                    <input class="form-control" type="search" placeholder="Press enter to search" id="searchInput">
+                </div>
+                <div class="col-sm-12 col-md-2 padding">
+                    <button id="showAll" class="btn btn-primary">Show all movies</button>
                 </div>
             </div>
         </nav>
-        <div class="card-group">
+        <div class="container card-group globalContainer">
             <div class="row col-sm-12">
 
             </div>
@@ -50,9 +66,8 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    -->
     <script src="script.js"></script>
 
 </body>
