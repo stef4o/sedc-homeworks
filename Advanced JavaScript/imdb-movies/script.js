@@ -10,6 +10,7 @@ function Movies(m) {
 
     function getMvs() {
         return m;
+
     }
 
     this.getAllMovies = function() {
@@ -42,7 +43,7 @@ let removeRows = (moviesContainer) => {
     moviesContainer.html("");
 }
 
-let getMovies = () => { return MGUA.length == 0 ? movies.getAllMovies() : MGUA };
+let getMovies = () => { return (MGUA.length == 0) ? movies.getAllMovies() : MGUA };
 
 let displayPage = (pageNumber, pageSize, movies, moviesContainer) => {
     removeRows(moviesContainer);
@@ -178,8 +179,14 @@ $(() => {
 
     $("#showAll").on('click', () => {
         MGUA = [];
-        console.log(MGUA);
-        console.log(movies.getAllMovies())
+        console.log(MGUA); // array is printed correctly: empty array
+        /* 
+            but here, is printed the last sorted array
+            [ex] it was sorted by rating, ascending order.
+            and when i call @movies.getAllMovies() it gives me the [ex] array
+            i wonder how can be this changed when this is actually a "private" 
+        */
+        console.log(movies.getAllMovies());
         $("#sortBy").val("none");
         $("#searchInput").val("");
         pageNumber = 1;
