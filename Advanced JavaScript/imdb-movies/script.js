@@ -9,7 +9,7 @@ let MAX_PAGE_NUMBER;
 function Movies(m) {
 
     function getMvs() {
-        return m;
+        return m.slice();
 
     }
 
@@ -85,11 +85,13 @@ let getMaxPageNumber = (length) => {
 }
 
 let handleSorts = (sortProperty) => {
-    if (sortProperty != "none")
-        sortMovies((a, b) => comparator(a[sortProperty], b[sortProperty], getSortOrder()));
+    if (sortProperty != "none") {
+        MGUA = sortMovies(getMovies(), sortProperty);
+        setPagesAndDisplayMovies();
+    }
 }
 
-let comparator = (a, b, order) => {
+let comparator = function(a, b) {
     if ($("sortBy").val() == "secondaryInfo") {
         a = parseInt(a.slice(1, 5), 10);
         b = parseInt(b.slice(1, 5), 10);
@@ -98,23 +100,23 @@ let comparator = (a, b, order) => {
         a = a.toLowerCase();
         b = b.toLowerCase();
     }
-    if (order == "ASCENDING") {
-        return a < b ? 1 : (a > b ? -1 : 0);
-    } else if (order == "DESCENDING") {
-        return a > b ? 1 : (a < b ? -1 : 0);
-    }
+    return sortOrder()(a, b);
 }
 
-let sortMovies = (wayOfSort) => {
-    MGUA = getMovies();
-    MGUA.sort(wayOfSort);
-    pageNumber = 1;
-    setPage(pageNumber);
-    displayPage(pageNumber, getPageSize(), MGUA, moviesContainer);
+let sortMovies = function(movies, sortProperty) {
+    return [].concat(movies.sort((a, b) => comparator(a[sortProperty], b[sortProperty])));
 }
 
-let getSortOrder = () => {
-    return $("#sortOrder").hasClass("fa-sort-amount-asc") ? "ASCENDING" : "DESCENDING";
+function asc(a, b) {
+    return a < b ? 1 : (a > b ? -1 : 0);
+}
+
+function desc(a, b) {
+    return a > b ? 1 : (a < b ? -1 : 0)
+}
+
+let sortOrder = () => {
+    return $("#sortOrder").hasClass("fa-sort-amount-asc") ? asc : desc;
 }
 
 let setPagesAndDisplayMovies = () => {
@@ -179,14 +181,6 @@ $(() => {
 
     $("#showAll").on('click', () => {
         MGUA = [];
-        console.log(MGUA); // array is printed correctly: empty array
-        /* 
-            but here, is printed the last sorted array
-            [ex] it was sorted by rating, ascending order.
-            and when i call @movies.getAllMovies() it gives me the [ex] array
-            i wonder how can be this changed when this is actually a "private" 
-        */
-        console.log(movies.getAllMovies());
         $("#sortBy").val("none");
         $("#searchInput").val("");
         pageNumber = 1;
