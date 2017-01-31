@@ -4,7 +4,6 @@ let MGUA = []; // Movies General Usage Array
 let pageSize;
 let pageNumber = 1;
 
-let MAX_PAGE_NUMBER;
 
 function Movies(m) {
 
@@ -70,7 +69,7 @@ let setPagination = (length) => {
 
 let setPage = (pageNumber) => {
     pageNumber < 2 ? $("#previous").addClass("disabled") : $("#previous").removeClass("disabled");
-    pageNumber > MAX_PAGE_NUMBER - 1 ? $("#next").addClass("disabled") : $("#next").removeClass("disabled");
+    pageNumber > getMaxPageNumber(getMovies().length) - 1 ? $("#next").addClass("disabled") : $("#next").removeClass("disabled");
     let pages = $("#pages");
     pages.find(".active").removeClass("active");
     pages.find("li").eq(pageNumber - 1).addClass("active");
@@ -136,7 +135,7 @@ $(() => {
     })
 
     $("#next").on('click', function() {
-        if (pageNumber < MAX_PAGE_NUMBER)
+        if (pageNumber < getMaxPageNumber(getMovies().length))
             setPage(++pageNumber);
         displayPage(pageNumber, getPageSize(), getMovies(), moviesContainer);
     })
