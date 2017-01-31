@@ -184,9 +184,7 @@ $(() => {
         $("#sortBy").val("none");
         $("#searchInput").val("");
         pageNumber = 1;
-        setPagination(getMaxPageNumber(movies.getAllMovies().length));
-        setPage(1);
-        displayPage(1, getPageSize(), movies.getAllMovies(), moviesContainer);
+        setPagesAndDisplayMovies();
     })
 
     $.ajax("data.json", {
